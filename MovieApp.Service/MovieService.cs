@@ -39,14 +39,13 @@ namespace MovieApp.Service
         public async Task<ICollection<Movie>> SearchMovies(MovieSearchCriteria searchCriteria)
         {
             var movies = await movieRepository.GetMovies();
-
-            return movies.Where(movie => movie.title == searchCriteria.Title
-                           || movie.year == searchCriteria.Year
+            return movies.Where(movie => (!string.IsNullOrEmpty(searchCriteria.Title) && movie.title.Contains(searchCriteria.Title, StringComparison.InvariantCultureIgnoreCase)
+                           || (searchCriteria.Year != null && movie.year == searchCriteria.Year)
                            || (!string.IsNullOrEmpty(searchCriteria.Director) && movie.info.directors != null && movie.info.directors.Contains(searchCriteria.Director))
-                           || (!string.IsNullOrEmpty(searchCriteria.Actor) &&  movie.info.actors != null && movie.info.actors.Contains(searchCriteria.Actor))
-                           || (searchCriteria.ReleaseDate != DateTime.MinValue  && movie.info.release_date != null && movie.info.release_date == searchCriteria.ReleaseDate)
-                           || (!string.IsNullOrEmpty(searchCriteria.Genre) &&  movie.info.genres != null && movie.info.genres.Contains(searchCriteria.Genre))
-                           ).ToList();       
+                           || (!string.IsNullOrEmpty(searchCriteria.Actor) && movie.info.actors != null && movie.info.actors.Contains(searchCriteria.Actor))
+                           || (searchCriteria.ReleaseDate != DateTime.MinValue && movie.info.release_date != null && movie.info.release_date == searchCriteria.ReleaseDate)
+                           || (!string.IsNullOrEmpty(searchCriteria.Genre) && movie.info.genres != null && movie.info.genres.Contains(searchCriteria.Genre))
+                           )).ToList();
         }
     }
 }

@@ -4,7 +4,7 @@ namespace MovieApp.Domain.Models
 {
     public class MovieSearchCriteria
     {
-        public int Year { get; set; }
+        public int? Year { get; set; }
         public string Genre { get; set; }
         public string Title { get; set; }
 
@@ -12,7 +12,7 @@ namespace MovieApp.Domain.Models
 
         public string Director { get; set; }
 
-        public DateTime ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
 
     }
 }

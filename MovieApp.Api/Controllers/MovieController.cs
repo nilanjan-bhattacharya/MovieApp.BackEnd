@@ -73,7 +73,7 @@ namespace MovieApp.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<ICollection<Movie>>> SearchMovies([Required] MovieSearchCriteria searchCriteria)
+        public async Task<ActionResult<ICollection<Movie>>> SearchMovies([FromQuery] MovieSearchCriteria searchCriteria)
         {
             var movies = await movieService.SearchMovies(searchCriteria);
 
