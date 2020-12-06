@@ -43,7 +43,7 @@ namespace MovieApp.Api.Controllers
         }
 
         /// <summary>Returns details of movie by name and director.</summary>
-        /// <param name="name">Name of movie.</param>
+        /// <param name="title">Title of movie.</param>
         /// <param name="director">Director of movie.</param>
         /// <response code="200">The movie successfully fetched.</response>
         /// <response code="404">The movie not found.</response>
@@ -52,9 +52,9 @@ namespace MovieApp.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<Movie>> GetMovieDetails(string name, string director)
+        public async Task<ActionResult<Movie>> GetMovieDetails(string title, string director)
         {
-            var movie = await movieService.GetMovieDetails(name, director);
+            var movie = await movieService.GetMovieDetails(title, director);
 
             if (movie == null)
             {
